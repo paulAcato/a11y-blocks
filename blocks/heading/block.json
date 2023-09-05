@@ -1,0 +1,55 @@
+{
+    "$schema" : "https://schemas.wp.org/trunk/block.json",
+    "name" : "a11y-blocks/heading",
+    "title" : "A11Y Blocks Heading",
+    "description" : "Heading descirption",
+    "category" : "text",
+    "attributes" : {
+        "allowedTags" : {
+            "type" : "array",
+            "default" : [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ]
+        },
+        "content" : {
+            "type" : "string",
+            "source" : "text",
+            "selector" : "h1, h2, h3, h4, h5, h6"
+        },
+        "tag" : {
+            "type" : "number",
+            "default" : 2
+        },
+        "tagShownAs" : {
+            "type" : "number",
+            "default" : 2
+        },
+        "srOnly" : {
+            "type" : "boolean",
+            "default" : false
+        }
+    },
+    "example" : {
+        "attributes" : {
+            "content" : "This shows the default heading content."
+        }
+    },
+    "style" : [
+        "a11y-blocks-heading-block"
+    ],
+    "editorStyle" : [
+        "a11y-blocks-heading-block-editor"
+    ],
+    "supports" : {
+        "className" : false,
+        "customClassName" : false,
+        "html" : false
+    },
+    "textdomain" : "a11y-blocks",
+    "version" : "1.0.0"
+}

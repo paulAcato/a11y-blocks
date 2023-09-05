@@ -25,7 +25,6 @@ function a11y_blocks_register_activation_hook() {
 
 register_activation_hook( A11Y_BLOCKS_PLUGIN_BASENAME, 'a11y_blocks_register_activation_hook' );
 
-
 // Check if WordPress version is at least 6.0
 if (version_compare(get_bloginfo('version'), '6.0', '<')) {
 	// Display an error message if the minimum version requirement is not met
