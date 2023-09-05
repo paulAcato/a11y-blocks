@@ -1,0 +1,23 @@
+{
+    "name": "a11y-blocks",
+    "version": "1.0.0",
+    "description": "Description: Enhances accessibility by adding accessible blocks to the block editor.",
+    "author": "Paul van Impelen <paul@acato.nl>",
+    "contributors": [
+        {
+            "name": "Paul van Impelen",
+            "email": "paul@acato.nl"
+        }
+    ],
+    "main": "build/index.js",
+    "scripts": {},
+    "devDependencies": {
+        "@wordpress/eslint-plugin": "^13.7.0",
+        "@wordpress/prettier-config": "^2.21.0",
+        "@wordpress/scripts": "^24.6.0"
+    },
+    "dependencies": {
+        "classnames": "^2.3.2"
+    },
+    "prettier": "@wordpress/prettier-config"
+}
