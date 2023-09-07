@@ -33,6 +33,10 @@ if ( ! defined( 'A11Y_BLOCKS_PLUGIN_DIR' ) ) {
 	define( 'A11Y_BLOCKS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 }
 
+if ( ! defined( 'A11Y_BLOCKS_PLUGIN_URI' ) ) {
+	define( 'A11Y_BLOCKS_PLUGIN_URI', plugin_dir_url( __FILE__ ) );
+}
+
 /**
  * Load all files from a given path.
  *

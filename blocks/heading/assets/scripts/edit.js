@@ -1,7 +1,7 @@
 import { _x } from '@wordpress/i18n';
 import { BlockControls, RichText } from '@wordpress/block-editor';
-import NCB_HeadingScreenreaderControl from './controls/ncb-heading-screenreader-control'
-import NCB_HeadingTagControl from '../../../../../editor/ncb-heading-tag-control';
+//import NCB_HeadingScreenreaderControl from './controls/ncb-heading-screenreader-control'
+// import NCB_HeadingTagControl from '../../../../../editor/ncb-heading-tag-control';
 import { useLayoutEffect, useMemo } from '@wordpress/element';
 import classNames from "classnames";
 
@@ -43,6 +43,7 @@ export default function Edit(
   return (
     <>
       <BlockControls>
+        {/*
         <NCB_HeadingTagControl
           value={ attributes.tag }
           allowedTags={ attributes.allowedTags }
@@ -57,6 +58,7 @@ export default function Edit(
           />
         ) }
         <NCB_HeadingScreenreaderControl value={ attributes.srOnly } setAttributes={ setAttributes } />
+        */}
       </BlockControls>
 
       <RichText

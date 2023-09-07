@@ -6,10 +6,7 @@ function a11y_blocks_register_blocks() {
 		return;
 	}
 
-	static $a11y_blocks_blocks_meta;
-	if( empty( $a11y_blocks_blocks_meta ) ) {
-		$a11y_blocks_blocks_meta = glob( A11Y_BLOCKS_PLUGIN_DIR . 'blocks' . DIRECTORY_SEPARATOR . '*' . DIRECTORY_SEPARATOR . 'block.json' );
-	}
+	$a11y_blocks_blocks_meta = a11y_blocks_get_blocks_meta();
 
 	if ( empty( $a11y_blocks_blocks_meta ) ) {
 		return;

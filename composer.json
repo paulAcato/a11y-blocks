@@ -1,0 +1,19 @@
+{
+    "version": "1.0.0",
+    "description": "Enhances accessibility by adding accessible blocks to the block editor.",
+    "author": "Paul van Impelen <paul@acato.nl>",
+    "contributors": [
+        {
+            "name": "Paul van Impelen",
+            "email": "paul@acato.nl"
+        }
+    ],
+    "require-dev": {
+        "wp-coding-standards/wpcs": "^3.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}
