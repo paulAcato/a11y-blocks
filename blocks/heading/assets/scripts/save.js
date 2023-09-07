@@ -9,7 +9,8 @@ export default function Save({attributes}) {
    * @private
    */
   const _CLASSES = classNames( {
-    [`a11y-blocks-heading-${attributes.tagShownAs}`]: !!attributes.tagShownAs,
+    [`a11y-blocks-heading-${attributes.showAs}`]: !!attributes.showAs,
+    [`a11y-blocks-heading-${attributes.tag}`]: !!attributes.tag && !attributes.showAs,
     ['sr-only']: !!attributes.srOnly
   } );
 

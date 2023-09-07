@@ -20,22 +20,17 @@ export default function Edit(
    */
   const _CLASSES = useMemo( () => {
     return classNames( {
-      [ `utrecht-heading-${ attributes.tagShownAs }` ]: !! attributes.tagShownAs,
+      [ `a11y-blocks-heading-${ attributes.showAs }` ]: !! attributes.showAs,
       [ 'sr-only' ]: !! attributes.srOnly
     } )
-  }, [ attributes.tagShownAs, !! attributes.srOnly ] );
+  }, [ attributes.showAs, !! attributes.srOnly ] );
 
   const _PLACEHOLDER = _x( 'Enter your heading…', 'ncb-denhaag/heading: Placeholder', 'nlds-community-blocks' );
 
   useLayoutEffect( () => {
     // Set back to default value.
-    if ( !! attributes.srOnly && 2 !== attributes.tagShownAs ) {
-      setAttributes( { tagShownAs: 2 } );
-    }
-
-    // Remove `<meta charset="utf-8">` from copy-and-paste actions.
-    if ( !! attributes.content && !! attributes.content.includes( '<meta charset="utf-8">' ) ) {
-      setAttributes( { content: attributes.content.replace( /<meta charSet="utf-8">/gmi, '' ).trim() } );
+    if ( !! attributes.srOnly && !! attributes.showAs ) {
+      setAttributes( { showAs: null } );
     }
   }, [ attributes.srOnly ] );
 
@@ -51,8 +46,8 @@ export default function Edit(
         />
         { ! attributes.srOnly && (
           <NCB_HeadingTagControl
-            attribute="tagShownAs"
-            value={ attributes.tagShownAs }
+            attribute="showAs"
+            value={ attributes.showAs }
             allowedTags={ attributes.allowedTags }
             setAttributes={ setAttributes }
           />
@@ -65,7 +60,13 @@ export default function Edit(
         identifier="content"
         tagName={ `h${ attributes.tag }` }
         value={ attributes.content }
-        onChange={ ( text ) => setAttributes( { content: text } ) }
+        onChange={(text) => {
+          // Remove `<meta charset="utf-8">` from copy-and-paste actions.
+          if (text.includes( '<meta charset="utf-8">' )) {
+            text = text.replace( /<meta charSet="utf-8">/gmi, '' ).trim()
+          }
+          setAttributes( {content: text} )
+        }}
         onRemove={ () => onReplace( [] ) }
         onMerge={ mergeBlocks }
         className={ _CLASSES }

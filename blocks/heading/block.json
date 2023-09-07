@@ -14,7 +14,7 @@
             "type" : "number",
             "default" : 2
         },
-        "tagShownAs" : {
+        "showAs" : {
             "type" : "number"
         },
         "srOnly" : {
