@@ -1,0 +1,22 @@
+.a11y-blocks-screenreader-heading {
+	clip: rect(1px, 1px, 1px, 1px);
+	word-wrap: normal;
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	order: 0;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+
+	&:active,
+	&:focus-visible {
+		clip: auto;
+		height: auto;
+		overflow: visible;
+		position: static;
+		white-space: normal;
+		width: auto
+	}
+}

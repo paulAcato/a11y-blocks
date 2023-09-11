@@ -1,7 +1,7 @@
 {
     "$schema" : "https://schemas.wp.org/trunk/block.json",
-    "name" : "a11y-blocks/heading",
-    "title" : "A11Y Blocks Heading",
+    "name" : "a11y-blocks/screenreader-heading",
+    "title" : "A heading block pure for screen readers.",
     "description" : "Heading description",
     "category" : "text",
     "attributes" : {
@@ -13,13 +13,6 @@
         "tag" : {
             "type" : "number",
             "default" : 2
-        },
-        "showAs" : {
-            "type" : "number"
-        },
-        "srOnly" : {
-            "type" : "boolean",
-            "default" : false
         }
     },
     "example" : {
@@ -29,13 +22,13 @@
     },
     "editorScript": "file:./index.js",
     "style" : [
-        "a11y-blocks-heading-block"
+        "a11y-blocks-screenreader-heading-block"
     ],
     "editorStyle" : [
-        "a11y-blocks-heading-block-editor"
+        "a11y-blocks-screenreader-heading-block-editor"
     ],
     "supports" : {
-        "anchor" : true,
+        "anchor" : false,
         "className" : false,
         "customClassName" : false,
         "html" : false

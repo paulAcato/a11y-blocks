@@ -2,7 +2,6 @@
 
 function enqueue_registering_blocks() {
 
-
 	$script_asset_path = A11Y_BLOCKS_PLUGIN_DIR . 'build/index.asset.php';
 	if ( a11y_blocks_has_resource( $script_asset_path ) ) {
 		$script_asset = require $script_asset_path;

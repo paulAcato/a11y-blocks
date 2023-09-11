@@ -1,35 +1,50 @@
 <?php
 
+/**
+ * Register the block styles and scripts by the generated block asset file.
+ * @return void
+ */
 function a11y_blocks_enqueue_block_client_assets() {
 	// Register shared block styles for the blocks.
-	$a11y_blocks_blocks_meta = a11y_blocks_get_blocks_meta();
+	$a11y_blocks_styles = glob( A11Y_BLOCKS_PLUGIN_DIR . 'build/blocks' . DIRECTORY_SEPARATOR . '*' . DIRECTORY_SEPARATOR . 'client.css' );
+	$a11y_blocks_scripts = glob( A11Y_BLOCKS_PLUGIN_DIR . 'build/blocks' . DIRECTORY_SEPARATOR . '*' . DIRECTORY_SEPARATOR . 'client.js' );
 
-	if ( empty( $a11y_blocks_blocks_meta ) ) {
-		return;
+	if ( ! empty( $a11y_blocks_styles ) ) {
+		foreach ( $a11y_blocks_styles as $a11y_blocks_style ) {
+			if ( ! a11y_blocks_has_resource( $a11y_blocks_style ) ) {
+				// Continue if the file is empty.
+				continue;
+			}
+
+			// Name of the block by the URL.
+			$a11y_blocks_block_name = preg_replace( '/.*\/build\/blocks\/(.*)\/client.css/', '$1', $a11y_blocks_style );
+
+			wp_register_style(
+				"a11y-blocks-$a11y_blocks_block_name-block",
+				a11y_blocks_mix( $a11y_blocks_style ),
+				[],
+				A11Y_BLOCKS_VERSION
+			);
+		}
 	}
 
-	foreach ( $a11y_blocks_blocks_meta as $block ) {
-		$block_meta = json_decode(
-		//phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-			file_get_contents( $block ),
-			false
-		);
+	if ( ! empty( $a11y_blocks_scripts ) ) {
+		foreach ( $a11y_blocks_scripts as $a11y_blocks_script ) {
+			if ( ! a11y_blocks_has_resource( $a11y_blocks_script ) ) {
+				// Continue if the file is empty.
+				continue;
+			}
 
-		if ( empty( $block_meta ) || empty( $block_meta->style ) ) {
-			continue;
+			// Name of the block by the URL.
+			$a11y_blocks_block_name = preg_replace( '/.*\/build\/blocks\/(.*)\/client.js/', '$1', $a11y_blocks_script );
+
+			wp_register_script(
+				"a11y-blocks-$a11y_blocks_block_name-block",
+				a11y_blocks_mix( $a11y_blocks_script ),
+				[],
+				A11Y_BLOCKS_VERSION,
+			);
 		}
-
-		if ( ! a11y_blocks_has_resource( A11Y_BLOCKS_PLUGIN_DIR . 'build/blocks/heading/client.css' ) ) {
-			// Continue if the file is empty.
-			continue;
-		}
-
-		wp_register_style(
-			is_array( $block_meta->style ) ? $block_meta->style[0] : $block_meta->style,
-			A11Y_BLOCKS_PLUGIN_URI . 'build/blocks/heading/client.css',
-			[],
-			$block_meta->version
-		);
 	}
 }
 

@@ -1,0 +1,21 @@
+.a11y-blocks-screenreader-heading {
+	clip: initial;
+	clip-path: none;
+	height: auto;
+	position: static;
+	width: 100%;
+
+	color: #949494;
+
+	@media (prefers-contrast: less) {
+		color: #c3c4c7;
+	}
+	@media (prefers-contrast: more) {
+		color: #757575;
+	}
+}
+
+[data-type="a11y-blocks/screenreader-heading"] .components-notice {
+	margin-inline: auto;
+	width: 100%;
+}

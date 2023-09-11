@@ -44,4 +44,4 @@ function a11y_blocks_allowed_block_types_all( $allowed_block_types, $block_edito
 	return ! empty( $allowed_blocks ) ? array_unique( $allowed_blocks ) : $allowed_block_types;
 }
 
-add_filter( 'allowed_block_types_all', 'a11y_blocks_allowed_block_types_all', 10, 2 );
+// add_filter( 'allowed_block_types_all', 'a11y_blocks_allowed_block_types_all', 10, 2 );

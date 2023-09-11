@@ -11,8 +11,9 @@
     ],
     "main": "build/index.js",
     "scripts": {
-        "build": "wp-scripts build ./blocks/index.js --output-path=build",
+        "build": "wp-scripts build ./blocks/index.js --output-path=build && npx mix build --production",
         "start": "wp-scripts start ./blocks/index.js --output-path=build",
+        "start-assets": "npx mix watch",
         "check-engines": "wp-scripts check-engines",
         "check-licenses": "wp-scripts check-licenses --prod --gpl2",
         "format": "wp-scripts format",
@@ -29,6 +30,9 @@
         "@wordpress/eslint-plugin": "^15.1.0",
         "@wordpress/prettier-config": "^2.24.0",
         "@wordpress/scripts": "^26.12.0",
+        "fs": "^0.0.1-security",
+        "laravel-mix": "^6.0.49",
+        "path": "^0.12.7",
         "resolve-url-loader": "^5.0.0"
     },
     "dependencies": {
