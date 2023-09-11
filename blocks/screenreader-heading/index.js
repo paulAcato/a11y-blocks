@@ -1,5 +1,5 @@
 import {registerBlockType} from '@wordpress/blocks';
-import {ReactComponent as icon} from './assets/icons/block-icon.svg';
+import {headingLevel2 as icon} from '@wordpress/icons';
 import edit from './assets/scripts/edit';
 import save from './assets/scripts/save';
 import metadata from './block.json';

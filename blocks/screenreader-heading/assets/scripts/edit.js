@@ -4,7 +4,6 @@ import HeadingTagControl from "./controls/heading-tag-control";
 import {useState, useMemo} from "@wordpress/element";
 import {Notice} from '@wordpress/components';
 
-
 export default function Edit(
   {
     attributes,
