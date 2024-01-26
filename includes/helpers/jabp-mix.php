@@ -7,7 +7,7 @@
  * @subpackage Werken_Voor_Denhaag_Theme/Helpers
  */
 
-if ( ! function_exists( 'jabp_blocks_mix' ) ) {
+if ( ! function_exists( 'jabp_mix' ) ) {
 
 	/**
 	 * Just a little helper to get filenames from the mix-manifest file.
@@ -16,7 +16,7 @@ if ( ! function_exists( 'jabp_blocks_mix' ) ) {
 	 *
 	 * @return string
 	 */
-	function jabp_blocks_mix( $path ): string {
+	function jabp_mix( $path ): string {
 		$manifest = YABP_DIR . '/build/mix-manifest.json';
 		if ( ! file_exists( $manifest ) ) {
 			return YABP_URI . $path;

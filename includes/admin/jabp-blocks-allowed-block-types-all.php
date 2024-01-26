@@ -16,7 +16,7 @@
  */
 function jabp_blocks_allowed_block_types_all( $allowed_block_types, $block_editor_context ) {
 
-	$jabp_blocks_meta = jabp_blocks_get_blocks_meta();
+	$jabp_blocks_meta = jabp_get_blocks_meta();
 
 	if ( empty( $jabp_blocks_meta ) ) {
 		return $allowed_block_types;

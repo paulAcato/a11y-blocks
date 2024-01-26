@@ -4,7 +4,7 @@
  * Register the block styles and scripts by the generated block asset file.
  * @return void
  */
-function jabp_blocks_enqueue_block_client_assets() {
+function jabp_enqueue_block_client_assets() {
 
 	// Register shared block styles for the blocks.
 	$jabp_block_path = YABP_DIR . 'build' . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . '*' . DIRECTORY_SEPARATOR;
@@ -14,7 +14,7 @@ function jabp_blocks_enqueue_block_client_assets() {
 
 	if ( ! empty( $jabp_blocks_styles ) ) {
 		foreach ( $jabp_blocks_styles as $jabp_blocks_style ) {
-			if ( ! jabp_blocks_has_resource( $jabp_blocks_style ) ) {
+			if ( ! jabp_has_resource( $jabp_blocks_style ) ) {
 				// Continue if the file is empty.
 				continue;
 			}
@@ -24,7 +24,7 @@ function jabp_blocks_enqueue_block_client_assets() {
 
 			wp_register_style(
 				"jabp-$jabp_block_name",
-				jabp_blocks_mix( $jabp_blocks_style ),
+				jabp_mix( $jabp_blocks_style ),
 				[],
 				YABP_VERSION
 			);
@@ -33,7 +33,7 @@ function jabp_blocks_enqueue_block_client_assets() {
 
 	if ( ! empty( $jabp_blocks_scripts ) ) {
 		foreach ( $jabp_blocks_scripts as $jabp_blocks_script ) {
-			if ( ! jabp_blocks_has_resource( $jabp_blocks_script ) ) {
+			if ( ! jabp_has_resource( $jabp_blocks_script ) ) {
 				// Continue if the file is empty.
 				continue;
 			}
@@ -43,7 +43,7 @@ function jabp_blocks_enqueue_block_client_assets() {
 
 			wp_register_script(
 				"jabp-$jabp_block_name",
-				jabp_blocks_mix( $jabp_blocks_script ),
+				jabp_mix( $jabp_blocks_script ),
 				[],
 				YABP_VERSION,
 			);
@@ -51,4 +51,4 @@ function jabp_blocks_enqueue_block_client_assets() {
 	}
 }
 
-add_action( 'enqueue_block_assets', 'jabp_blocks_enqueue_block_client_assets' );
+add_action( 'enqueue_block_assets', 'jabp_enqueue_block_client_assets' );

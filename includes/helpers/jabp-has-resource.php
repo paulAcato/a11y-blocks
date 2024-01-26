@@ -7,7 +7,7 @@
  *
  * @return bool|mixed
  */
-function jabp_blocks_has_resource( $path ) {
+function jabp_has_resource( $path ) {
 	static $resources = null;
 
 	if ( isset( $resources[ $path ] ) ) {

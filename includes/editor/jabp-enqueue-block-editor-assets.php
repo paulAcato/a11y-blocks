@@ -11,7 +11,7 @@ function jabp_enqueue_block_editor_assets() {
 
 	if ( ! empty( $jabp_blocks_styles ) ) {
 		foreach ( $jabp_blocks_styles as $jabp_blocks_style ) {
-			if ( ! jabp_blocks_has_resource( $jabp_blocks_style ) ) {
+			if ( ! jabp_has_resource( $jabp_blocks_style ) ) {
 				// Continue if the file is empty.
 				continue;
 			}
@@ -21,7 +21,7 @@ function jabp_enqueue_block_editor_assets() {
 
 			wp_register_style(
 				"jabp-$jabp_blocks_block_name-editor",
-				jabp_blocks_mix( $jabp_blocks_style ),
+				jabp_mix( $jabp_blocks_style ),
 				["jabp-$jabp_blocks_block_name"],
 				YABP_VERSION
 			);
