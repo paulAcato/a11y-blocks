@@ -22,10 +22,12 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-defined( 'YABP_BLOCKS_VERSION' ) or define( 'YABP_BLOCKS_VERSION', '1.0.0' );
-defined( 'YABP_BLOCKS_PLUGIN_BASENAME' ) or define( 'YABP_BLOCKS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
-defined( 'YABP_BLOCKS_PLUGIN_DIR' ) or define( 'YABP_BLOCKS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-defined( 'YABP_BLOCKS_PLUGIN_URI' ) or define( 'YABP_BLOCKS_PLUGIN_URI', plugin_dir_url( __FILE__ ) );
+defined( 'YABP_VERSION' ) or define( 'YABP_VERSION', '1.0.0' );
+defined( 'YABP_BASENAME' ) or define( 'YABP_BASENAME', plugin_basename( __FILE__ ) );
+defined( 'YABP_DIR' ) or define( 'YABP_DIR', plugin_dir_path( __FILE__ ) );
+defined( 'YABP_URI' ) or define( 'YABP_URI', plugin_dir_url( __FILE__ ) );
+defined( 'YABP_WP_REQUIRED_VERSION' ) or define( 'YABP_WP_REQUIRED_VERSION', '6.2' );
+defined( 'YABP_WP_VALID_VERSION' ) or define( 'YABP_WP_VALID_VERSION', version_compare( get_bloginfo( 'version' ), YABP_WP_REQUIRED_VERSION, '>=' ) );
 
 /**
  * Load all files from a given path.
@@ -36,13 +38,13 @@ defined( 'YABP_BLOCKS_PLUGIN_URI' ) or define( 'YABP_BLOCKS_PLUGIN_URI', plugin_
  */
 function load( $path ) {
 
-	$files = glob( YABP_BLOCKS_PLUGIN_DIR . $path . DIRECTORY_SEPARATOR . '*.php' );
+	$files = glob( YABP_DIR . $path . DIRECTORY_SEPARATOR . '*.php' );
 
 	foreach ( $files as $file ) {
 		require_once $file;
 	}
 
-	$directories = glob( YABP_BLOCKS_PLUGIN_DIR . $path, GLOB_ONLYDIR );
+	$directories = glob( YABP_DIR . $path, GLOB_ONLYDIR );
 
 	if ( ! empty( $directories ) ) {
 		foreach ( $directories as $directory ) {
@@ -55,9 +57,9 @@ function load( $path ) {
 
 			foreach ( $scanned_directories as $scanned_directory ) {
 
-				if ( is_file( YABP_BLOCKS_PLUGIN_DIR . $path . DIRECTORY_SEPARATOR . $scanned_directory ) ) {
+				if ( is_file( YABP_DIR . $path . DIRECTORY_SEPARATOR . $scanned_directory ) ) {
 					// File in directory;
-					require_once YABP_BLOCKS_PLUGIN_DIR . $path . DIRECTORY_SEPARATOR . $scanned_directory;
+					require_once YABP_DIR . $path . DIRECTORY_SEPARATOR . $scanned_directory;
 
 					continue;
 				}

@@ -3,6 +3,9 @@ import {BlockControls, RichText} from '@wordpress/block-editor';
 import HeadingTagControl from "./controls/heading-tag-control";
 import {useState, useMemo} from "@wordpress/element";
 import {Notice} from '@wordpress/components';
+import {Platform} from '@wordpress/element';
+import { createBlock, getDefaultBlockName } from '@wordpress/blocks';
+import CombinedNotices from "../../../components/combined-notices";
 
 export default function Edit(
   {
@@ -10,15 +13,14 @@ export default function Edit(
     setAttributes,
     mergeBlocks,
     isSelected,
-    clientId
+    clientId,
+    onReplace
   }
 ) {
   const {
     lockPostSaving,
     unlockPostSaving,
-    removeBlock,
-    getBlocksByClientId,
-    insertBlock
+    removeBlock
   } = wp.data.dispatch( 'core/editor' );
   const {createNotice, removeNotice} = wp.data.dispatch( 'core/notices' );
   const [locks, setLocks] = useState( {} );
@@ -42,7 +44,7 @@ export default function Edit(
 
         const actions = [
           {
-            label: __( 'Go to the block', 'a11y-blocks' ),
+            label: __( 'Go to the block', 'jabp' ),
             onClick: () => document.getElementById( `block-${clientId}` ).scrollIntoView( {
               behavior: "smooth",
               block: "start",
@@ -50,7 +52,7 @@ export default function Edit(
             } ),
           },
           {
-            label: __( 'Remove block', 'a11y-blocks' ),
+            label: __( 'Remove block', 'jabp' ),
             onClick: () => {
               removeBlock( clientId );
               maybeUnlockEditor( handle );
@@ -81,47 +83,52 @@ export default function Edit(
     unlockPostSaving( handle );
   }
 
-  lock( !attributes.content && !isSelected, `${clientId}-warning`, __( 'Please remove or populate the empty Screen reader heading, saving the page will be disabled in the meantime.', 'a11y-blocks' ), 'warning' );
-
-  /**
-   * Combine all notices and show in the block.
-   * @type {*[]}
-   */
-  const combinedNotices = useMemo( () => {
-    if (!locks || Object.keys( locks ).length === 0) {
-      return;
-    }
-
-    return Object.values( locks ).map( ({type, message}) => <Notice status={type} isDismissible={false}>{message}</Notice> );
-  }, [locks] );
+  lock( !attributes.content && !isSelected, `${clientId}-warning`, __( 'Please remove or populate the empty Screen reader heading, saving the page will be disabled in the meantime.', 'jabp' ), 'warning' );
 
   return (
     <>
       <BlockControls>
-        <HeadingTagControl tag={attributes.tag} setAttributes={setAttributes} />
+        <HeadingTagControl level={attributes.level} setAttributes={setAttributes} />
       </BlockControls>
 
-      {combinedNotices}
+      <CombinedNotices notices={locks} />
 
       <RichText
         identifier="content"
-        tagName={`h${attributes.tag}`}
+        tagName={`h${attributes.level}`}
         value={attributes.content}
-        onChange={(text) => {
-          // Remove `<meta charset="utf-8">` from copy-and-paste actions.
-          if (text.includes( '<meta charset="utf-8">' )) {
-            text = text.replace( /<meta charSet="utf-8">/gmi, '' ).trim()
-          }
-          setAttributes( {content: text} )
-        }}
-        onRemove={() => onReplace( [] )}
-        onMerge={mergeBlocks}
-        className="a11y-blocks-screenreader-heading"
+        className="jabp-sr-heading"
         allowedFormats={[]}
-        placeholder={_x( 'Enter your heading for screen readers…', 'Placeholder', 'a11y-blocks' )}
-        multiline={false}
-        onReplace={() => {
+        placeholder={_x( 'Enter your heading for screen readers…', 'Placeholder', 'jabp' )}
+        onChange={(content) => {
+          // Remove `<meta charset="utf-8">` from copy-and-paste actions.
+          if (content.includes( '<meta charset="utf-8">' )) {
+            content = content.replace( /<meta charSet="utf-8">/gmi, '' ).trim()
+          }
+          setAttributes( {content} );
         }}
+        onMerge={ mergeBlocks }
+        onSplit={ ( content, isOriginal ) => {
+          let block;
+
+          if ( isOriginal || content ) {
+            block = createBlock( 'jabp/sr-heading', {
+              ...attributes,
+              content,
+            } );
+          } else {
+            block = createBlock( getDefaultBlockName() ?? 'jabp/sr-heading' );
+          }
+
+          if ( isOriginal ) {
+            block.clientId = clientId;
+          }
+
+          return block;
+        } }
+        onReplace={ onReplace }
+        onRemove={ () => onReplace( [] ) }
+        {...(Platform.isNative && {deleteEnter: true})}
       />
     </>
   );

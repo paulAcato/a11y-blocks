@@ -1,11 +1,10 @@
-.a11y-blocks-screenreader-heading {
+.jabp-sr-heading {
 	clip: initial;
 	clip-path: none;
+	color: #949494;
 	height: auto;
 	position: static;
 	width: 100%;
-
-	color: #949494;
 
 	@media (prefers-contrast: less) {
 		color: #c3c4c7;

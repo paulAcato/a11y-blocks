@@ -1,7 +1,7 @@
 {
     "name" : "Just Another Block Plugin",
     "version" : "1.0.0",
-    "description" : "Enhances the block editor by adding usefully accessible blocks to the block editor.",
+    "description" : "Enhances the block editor by adding usefully accessible src/blocks to the block editor.",
     "author" : "Paul van Impelen <paulvanimpelen@google.com>",
     "contributors" : [
         {

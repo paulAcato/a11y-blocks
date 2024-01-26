@@ -17,20 +17,14 @@ const MIX_OPTIONS = {
  * @param {string} directory path to file from root.
  * @return {string[]}
  */
-const jabp_blocks_get_files = function (directory) {
-  return fs.readdirSync( directory ).filter( file => (ALLOWED_FILES.includes( path.extname( file ) ) || ALLOWED_FILES.includes( file )) ? fs.statSync( `${directory}/${file}` ).isFile() : false );
-};
+const jabp_blocks_get_files = (directory) => fs.readdirSync( directory ).filter( file => (ALLOWED_FILES.includes( path.extname( file ) ) || ALLOWED_FILES.includes( file )) ? fs.statSync( `${directory}/${file}` ).isFile() : false );
 
 /**
  * Get all directories from a specific directory.
  * @param {string} directory The directory to check.
  * @return {string[]}
  */
-const getDirectories = function (directory) {
-  return fs.readdirSync( directory ).filter( function (file) {
-    return fs.statSync( path.join( directory, file ) ).isDirectory();
-  } );
-};
+const getDirectories = (directory) => fs.readdirSync( directory ).filter( (file) => fs.statSync( path.join( directory, file ) ).isDirectory() );
 
 /**
  * Loop through the community block directories and block directories and build any files necessary.
@@ -41,9 +35,9 @@ const getDirectories = function (directory) {
  */
 const jabp_blocks_build_assets = (folder, outputFolder = '') => {
   if (!!outputFolder) {
-    Array.from( getDirectories( folder ) ).forEach( (typeDir) => buildFiles( typeDir, `${folder}/${typeDir}`, `${outputFolder}/${typeDir}` ) );
+    getDirectories( folder ).forEach( (typeDir) => buildFiles( typeDir, `${folder}/${typeDir}`, `${outputFolder}/${typeDir}` ) );
   } else {
-    Array.from( getDirectories( folder ) ).forEach( (typeDir) => buildFiles( typeDir, `${folder}/${typeDir}` ) );
+    getDirectories( folder ).forEach( (typeDir) => buildFiles( typeDir, `${folder}/${typeDir}` ) );
   }
 };
 
@@ -56,6 +50,11 @@ const jabp_blocks_build_assets = (folder, outputFolder = '') => {
  * @constructor
  */
 const buildFiles = (typeDir, path, outputPath = '') => {
+  if(!!outputPath && outputPath.startsWith('src/')) {
+    outputPath = outputPath.replace('src/', '');
+  }
+
+
   const files = jabp_blocks_get_files( path );
 
   if (0 === files.length) {
@@ -71,7 +70,7 @@ const buildFiles = (typeDir, path, outputPath = '') => {
             outputPath
           )
             .options( MIX_OPTIONS.styles )
-            // .setResourceRoot( `./assets/` );
+          // .setResourceRoot( `./assets/` );
         }
         break;
       case 'scripts':
@@ -91,27 +90,18 @@ const buildFiles = (typeDir, path, outputPath = '') => {
  * @constructor
  */
 const jabp_blocks_build = (folder, outputFolder = folder) => {
-  Array.from( getDirectories( folder ) ).forEach( (blockDir) => {
+  getDirectories( folder ).forEach( (blockDir) => {
     mix.copy( `${folder}/${blockDir}/block.json`, `${MIX_OPTIONS.outputDir}/blocks/${blockDir}` );
-
-    const hasAssetsDirectories = !isEmptyDirectory( `${folder}/${blockDir}` ) && -1 !== Array.from( getDirectories( `${folder}/${blockDir}` ) ).indexOf( 'assets' );
-    if (hasAssetsDirectories) {
-      const directories = Array.from( getDirectories( `${folder}/${blockDir}/assets` ) ).filter( x => ALLOWED_DIRS.includes( x ) );
-
-      if (directories.length > 0) {
-        directories.forEach( (typeDir) => buildFiles( typeDir, `${folder}/${blockDir}/assets/${typeDir}`, `${outputFolder}/${blockDir}` ) );
-      }
-    }
+    getDirectories( `${folder}/${blockDir}` ).filter( x => ALLOWED_DIRS.includes( x ) && !isEmptyDirectory( `${folder}/${blockDir}/${x}` ) ).forEach( (typeDir) => buildFiles( typeDir, `${folder}/${blockDir}/${typeDir}`, `${outputFolder}/${blockDir}` ) );
   } );
 };
-
 
 /**
  * Checks if directory is empty.
  * @param {string} dirPath The path to the directory.
  * @return {boolean}
  */
-const isEmptyDirectory = function (dirPath) {
+const isEmptyDirectory =  (dirPath) => {
   try {
     const files = fs.readdirSync( dirPath );
     return files.length === 0;
@@ -128,14 +118,13 @@ const isEmptyDirectory = function (dirPath) {
 const isFileEmpty = function (filePath) {
   try {
     const stats = fs.statSync( filePath );
-    return stats.size === 0;
+    return stats.size === 0; // File exists and is empty.
   } catch (err) {
-    return true; // File does not exist or there was an error accessing it
+    return true; // File does not exist or there was an error accessing it.
   }
 }
 
-jabp_blocks_build( 'blocks' );
-
+jabp_blocks_build( 'src/blocks' );
 
 mix.setPublicPath( MIX_OPTIONS.outputDir )
   .version()

@@ -4,9 +4,10 @@
  * Register the block editor scripts and styles by the generated block asset file.
  * @return void
  */
-function jabp_blocks_enqueue_block_editor_assets() {
+function jabp_enqueue_block_editor_assets() {
+
 	// Register shared block styles for the blocks.
-	$jabp_blocks_styles = glob( YABP_BLOCKS_PLUGIN_DIR . 'build/blocks' . DIRECTORY_SEPARATOR . '*' . DIRECTORY_SEPARATOR . 'editor.css' );
+	$jabp_blocks_styles = glob( YABP_DIR . 'build/blocks' . DIRECTORY_SEPARATOR . '*' . DIRECTORY_SEPARATOR . 'editor.css' );
 
 	if ( ! empty( $jabp_blocks_styles ) ) {
 		foreach ( $jabp_blocks_styles as $jabp_blocks_style ) {
@@ -19,13 +20,13 @@ function jabp_blocks_enqueue_block_editor_assets() {
 			$jabp_blocks_block_name = preg_replace( '/.*\/build\/blocks\/(.*)\/editor.css/', '$1', $jabp_blocks_style );
 
 			wp_register_style(
-				"a11y-blocks-$jabp_blocks_block_name-block-editor",
+				"jabp-$jabp_blocks_block_name-editor",
 				jabp_blocks_mix( $jabp_blocks_style ),
-				[],
-				YABP_BLOCKS_VERSION
+				["jabp-$jabp_blocks_block_name"],
+				YABP_VERSION
 			);
 		}
 	}
 }
 
-add_action( 'enqueue_block_assets', 'jabp_blocks_enqueue_block_editor_assets' );
+add_action( 'enqueue_block_editor_assets', 'jabp_enqueue_block_editor_assets' );

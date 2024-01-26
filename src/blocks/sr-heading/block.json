@@ -1,16 +1,25 @@
 {
     "$schema" : "https://schemas.wp.org/trunk/block.json",
+    "apiVersion" : 1,
     "name" : "jabp/sr-heading",
     "title" : "Screen reader heading",
-    "description" : "A heading block pure for screen readers.",
     "category" : "text",
+    "description" : "A heading block pure for screen readers.",
+    "keywords" : [
+        "title",
+        "subtitle",
+        "screenreader",
+        "a11y",
+        "accessibility"
+    ],
     "attributes" : {
         "content" : {
             "type" : "string",
             "source" : "text",
-            "selector" : "h1, h2, h3, h4, h5, h6"
+            "selector" : ".jabp-sr-heading",
+            "__experimentalRole" : "content"
         },
-        "tag" : {
+        "level" : {
             "type" : "number",
             "default" : 2
         }
@@ -20,18 +29,18 @@
             "content" : "This shows the default heading content."
         }
     },
-    "editorScript" : "file:./index.js",
-    "style" : [
-        "jabp-sr-heading-block"
-    ],
+    "style" : "jabp-sr-heading",
     "editorStyle" : [
-        "jabp-sr-heading-block-editor"
+        "jabp-sr-heading-editor"
     ],
+    "editorScript" : "file:./index.js",
     "supports" : {
         "anchor" : false,
         "className" : false,
         "customClassName" : false,
-        "html" : false
+        "html" : false,
+        "__unstablePasteTextInline" : true,
+        "__experimentalSlashInserter" : true
     },
     "textdomain" : "jabp",
     "version" : "1.0.0",

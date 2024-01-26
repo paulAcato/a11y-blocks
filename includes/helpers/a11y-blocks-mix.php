@@ -17,9 +17,9 @@ if ( ! function_exists( 'jabp_blocks_mix' ) ) {
 	 * @return string
 	 */
 	function jabp_blocks_mix( $path ): string {
-		$manifest = YABP_BLOCKS_PLUGIN_DIR . '/build/mix-manifest.json';
+		$manifest = YABP_DIR . '/build/mix-manifest.json';
 		if ( ! file_exists( $manifest ) ) {
-			return YABP_BLOCKS_PLUGIN_URI . $path;
+			return YABP_URI . $path;
 		}
 
 		$manifest = json_decode(
@@ -27,20 +27,20 @@ if ( ! function_exists( 'jabp_blocks_mix' ) ) {
 			file_get_contents( $manifest )
 		);
 
-		if ( str_contains( $path, YABP_BLOCKS_PLUGIN_DIR . 'build' ) ) {
-			$path = str_replace( YABP_BLOCKS_PLUGIN_DIR . 'build', '', $path );
+		if ( str_contains( $path, YABP_DIR . 'build' ) ) {
+			$path = str_replace( YABP_DIR . 'build', '', $path );
 		}
 
 		$manifest = get_object_vars( $manifest );
 
 		if ( ! array_search( $path, $manifest, true ) ) {
 			if ( ! empty( $manifest[ $path ] ) ) {
-				return untrailingslashit( YABP_BLOCKS_PLUGIN_URI . 'build' ) . $manifest[ $path ];
+				return untrailingslashit( YABP_URI . 'build' ) . $manifest[ $path ];
 			}
 
-			return untrailingslashit( YABP_BLOCKS_PLUGIN_URI . 'build' ) . $path;
+			return untrailingslashit( YABP_URI . 'build' ) . $path;
 		}
 
-		return untrailingslashit( YABP_BLOCKS_PLUGIN_URI . 'build' ) . $manifest[ $path ];
+		return untrailingslashit( YABP_URI . 'build' ) . $manifest[ $path ];
 	}
 }

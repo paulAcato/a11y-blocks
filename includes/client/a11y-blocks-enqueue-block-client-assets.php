@@ -5,9 +5,12 @@
  * @return void
  */
 function jabp_blocks_enqueue_block_client_assets() {
+
 	// Register shared block styles for the blocks.
-	$jabp_blocks_styles = glob( YABP_BLOCKS_PLUGIN_DIR . 'build/blocks' . DIRECTORY_SEPARATOR . '*' . DIRECTORY_SEPARATOR . 'client.css' );
-	$jabp_blocks_scripts = glob( YABP_BLOCKS_PLUGIN_DIR . 'build/blocks' . DIRECTORY_SEPARATOR . '*' . DIRECTORY_SEPARATOR . 'client.js' );
+	$jabp_block_path = YABP_DIR . 'build' . DIRECTORY_SEPARATOR . 'blocks' . DIRECTORY_SEPARATOR . '*' . DIRECTORY_SEPARATOR;
+
+	$jabp_blocks_styles = glob( $jabp_block_path . 'client.css' );
+	$jabp_blocks_scripts = glob( $jabp_block_path . 'client.js' );
 
 	if ( ! empty( $jabp_blocks_styles ) ) {
 		foreach ( $jabp_blocks_styles as $jabp_blocks_style ) {
@@ -15,15 +18,15 @@ function jabp_blocks_enqueue_block_client_assets() {
 				// Continue if the file is empty.
 				continue;
 			}
-
+			
 			// Name of the block by the URL.
-			$jabp_blocks_block_name = preg_replace( '/.*\/build\/blocks\/(.*)\/client.css/', '$1', $jabp_blocks_style );
+			$jabp_block_name = preg_replace( '/.*\/build\/blocks\/(.*)\/client.css/', '$1', $jabp_blocks_style );
 
 			wp_register_style(
-				"a11y-blocks-$jabp_blocks_block_name-block",
+				"jabp-$jabp_block_name",
 				jabp_blocks_mix( $jabp_blocks_style ),
 				[],
-				YABP_BLOCKS_VERSION
+				YABP_VERSION
 			);
 		}
 	}
@@ -36,13 +39,13 @@ function jabp_blocks_enqueue_block_client_assets() {
 			}
 
 			// Name of the block by the URL.
-			$jabp_blocks_block_name = preg_replace( '/.*\/build\/blocks\/(.*)\/client.js/', '$1', $jabp_blocks_script );
+			$jabp_block_name = preg_replace( '/.*\/build\/blocks\/(.*)\/client.js/', '$1', $jabp_blocks_script );
 
 			wp_register_script(
-				"a11y-blocks-$jabp_blocks_block_name-block",
+				"jabp-$jabp_block_name",
 				jabp_blocks_mix( $jabp_blocks_script ),
 				[],
-				YABP_BLOCKS_VERSION,
+				YABP_VERSION,
 			);
 		}
 	}
