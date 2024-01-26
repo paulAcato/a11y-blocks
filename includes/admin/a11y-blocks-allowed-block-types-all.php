@@ -14,16 +14,16 @@
  *
  * @return array|mixed
  */
-function a11y_blocks_allowed_block_types_all( $allowed_block_types, $block_editor_context ) {
+function jabp_blocks_allowed_block_types_all( $allowed_block_types, $block_editor_context ) {
 
-	$a11y_blocks_blocks_meta = a11y_blocks_get_blocks_meta();
+	$jabp_blocks_blocks_meta = jabp_blocks_get_blocks_meta();
 
-	if ( empty( $a11y_blocks_blocks_meta ) ) {
+	if ( empty( $jabp_blocks_blocks_meta ) ) {
 		return $allowed_block_types;
 	}
 
 	$allowed_blocks = [];
-	foreach ( $a11y_blocks_blocks_meta as $block ) {
+	foreach ( $jabp_blocks_blocks_meta as $block ) {
 		$block_meta = json_decode(
 		//phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 			file_get_contents( $block ),
@@ -44,4 +44,4 @@ function a11y_blocks_allowed_block_types_all( $allowed_block_types, $block_edito
 	return ! empty( $allowed_blocks ) ? array_unique( $allowed_blocks ) : $allowed_block_types;
 }
 
-// add_filter( 'allowed_block_types_all', 'a11y_blocks_allowed_block_types_all', 10, 2 );
+// add_filter( 'allowed_block_types_all', 'jabp_blocks_allowed_block_types_all', 10, 2 );

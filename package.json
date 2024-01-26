@@ -1,12 +1,13 @@
 {
-    "name": "a11y-blocks",
     "version": "1.0.0",
-    "description": "Enhances accessibility by adding accessible blocks to the block editor.",
-    "author": "Paul van Impelen <paul@acato.nl>",
+    "description": "Enhances the block editor by adding usefully accessible blocks to the block editor.",
+    "author": "Paul van Impelen <paulvanimpelen@google.com>",
     "contributors": [
         {
             "name": "Paul van Impelen",
-            "email": "paul@acato.nl"
+            "email": "paulvanimpelen@google.com>",
+            "function": "Frontend Developer",
+            "url": "https://themeforest.net/search/paulvanimpelen"
         }
     ],
     "main": "build/index.js",

@@ -1,1 +1,1 @@
-import './screenreader-heading/index.js';
+import './sr-heading/index.js';

@@ -1,19 +1,22 @@
 {
-    "version": "1.0.0",
-    "description": "Enhances accessibility by adding accessible blocks to the block editor.",
-    "author": "Paul van Impelen <paul@acato.nl>",
-    "contributors": [
+    "name" : "Just Another Block Plugin",
+    "version" : "1.0.0",
+    "description" : "Enhances the block editor by adding usefully accessible blocks to the block editor.",
+    "author" : "Paul van Impelen <paulvanimpelen@google.com>",
+    "contributors" : [
         {
-            "name": "Paul van Impelen",
-            "email": "paul@acato.nl"
+            "name" : "Paul van Impelen",
+            "email" : "paulvanimpelen@google.com>",
+            "function" : "Frontend Developer",
+            "url" : "https://themeforest.net/search/paulvanimpelen"
         }
     ],
-    "require-dev": {
-        "wp-coding-standards/wpcs": "^3.0"
+    "require-dev" : {
+        "wp-coding-standards/wpcs" : "^3.0"
     },
-    "config": {
-        "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
+    "config" : {
+        "allow-plugins" : {
+            "dealerdirect/phpcodesniffer-composer-installer" : true
         }
     }
 }

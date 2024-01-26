@@ -7,7 +7,7 @@
  * @subpackage Werken_Voor_Denhaag_Theme/Helpers
  */
 
-if ( ! function_exists( 'a11y_blocks_mix' ) ) {
+if ( ! function_exists( 'jabp_blocks_mix' ) ) {
 
 	/**
 	 * Just a little helper to get filenames from the mix-manifest file.
@@ -16,10 +16,10 @@ if ( ! function_exists( 'a11y_blocks_mix' ) ) {
 	 *
 	 * @return string
 	 */
-	function a11y_blocks_mix( $path ): string {
-		$manifest = A11Y_BLOCKS_PLUGIN_DIR . '/build/mix-manifest.json';
+	function jabp_blocks_mix( $path ): string {
+		$manifest = YABP_BLOCKS_PLUGIN_DIR . '/build/mix-manifest.json';
 		if ( ! file_exists( $manifest ) ) {
-			return A11Y_BLOCKS_PLUGIN_URI . $path;
+			return YABP_BLOCKS_PLUGIN_URI . $path;
 		}
 
 		$manifest = json_decode(
@@ -27,20 +27,20 @@ if ( ! function_exists( 'a11y_blocks_mix' ) ) {
 			file_get_contents( $manifest )
 		);
 
-		if ( str_contains( $path, A11Y_BLOCKS_PLUGIN_DIR . 'build' ) ) {
-			$path = str_replace( A11Y_BLOCKS_PLUGIN_DIR . 'build', '', $path );
+		if ( str_contains( $path, YABP_BLOCKS_PLUGIN_DIR . 'build' ) ) {
+			$path = str_replace( YABP_BLOCKS_PLUGIN_DIR . 'build', '', $path );
 		}
 
 		$manifest = get_object_vars( $manifest );
 
 		if ( ! array_search( $path, $manifest, true ) ) {
 			if ( ! empty( $manifest[ $path ] ) ) {
-				return untrailingslashit( A11Y_BLOCKS_PLUGIN_URI . 'build' ) . $manifest[ $path ];
+				return untrailingslashit( YABP_BLOCKS_PLUGIN_URI . 'build' ) . $manifest[ $path ];
 			}
 
-			return untrailingslashit( A11Y_BLOCKS_PLUGIN_URI . 'build' ) . $path;
+			return untrailingslashit( YABP_BLOCKS_PLUGIN_URI . 'build' ) . $path;
 		}
 
-		return untrailingslashit( A11Y_BLOCKS_PLUGIN_URI . 'build' ) . $manifest[ $path ];
+		return untrailingslashit( YABP_BLOCKS_PLUGIN_URI . 'build' ) . $manifest[ $path ];
 	}
 }

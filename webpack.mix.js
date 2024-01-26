@@ -17,7 +17,7 @@ const MIX_OPTIONS = {
  * @param {string} directory path to file from root.
  * @return {string[]}
  */
-const A11y_blocks_get_files = function (directory) {
+const jabp_blocks_get_files = function (directory) {
   return fs.readdirSync( directory ).filter( file => (ALLOWED_FILES.includes( path.extname( file ) ) || ALLOWED_FILES.includes( file )) ? fs.statSync( `${directory}/${file}` ).isFile() : false );
 };
 
@@ -39,7 +39,7 @@ const getDirectories = function (directory) {
  * @param {string} outputFolder name of the folder to output.
  * @constructor
  */
-const A11y_blocks_build_assets = (folder, outputFolder = '') => {
+const jabp_blocks_build_assets = (folder, outputFolder = '') => {
   if (!!outputFolder) {
     Array.from( getDirectories( folder ) ).forEach( (typeDir) => buildFiles( typeDir, `${folder}/${typeDir}`, `${outputFolder}/${typeDir}` ) );
   } else {
@@ -56,7 +56,7 @@ const A11y_blocks_build_assets = (folder, outputFolder = '') => {
  * @constructor
  */
 const buildFiles = (typeDir, path, outputPath = '') => {
-  const files = A11y_blocks_get_files( path );
+  const files = jabp_blocks_get_files( path );
 
   if (0 === files.length) {
     return;
@@ -90,7 +90,7 @@ const buildFiles = (typeDir, path, outputPath = '') => {
  * @param {string} outputFolder name of the folder to output.
  * @constructor
  */
-const A11y_blocks_build = (folder, outputFolder = folder) => {
+const jabp_blocks_build = (folder, outputFolder = folder) => {
   Array.from( getDirectories( folder ) ).forEach( (blockDir) => {
     mix.copy( `${folder}/${blockDir}/block.json`, `${MIX_OPTIONS.outputDir}/blocks/${blockDir}` );
 
@@ -134,7 +134,7 @@ const isFileEmpty = function (filePath) {
   }
 }
 
-A11y_blocks_build( 'blocks' );
+jabp_blocks_build( 'blocks' );
 
 
 mix.setPublicPath( MIX_OPTIONS.outputDir )

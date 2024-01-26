@@ -1,0 +1,71 @@
+<?php
+/**
+ * This file is read by WordPress to generate the plugin information in the plugin admin area. This file also includes
+ * all the dependencies used by the plugin and starts the plugin.
+ *
+ * @since             1.0.0
+ * @package           Just_Another_Block_Plugin
+ *
+ * @wordpress-plugin
+ * Plugin Name:       Just Another Block Plugin
+ * Description:       Enhances the block editor by adding usefully accessible blocks to the block editor.
+ * Version:           1.0.0
+ * Author:            Paul van Impelen <paulvanimpelen@google.com>
+ * Author URI:        https://themeforest.net/search/paulvanimpelen
+ * Text Domain:       jabp
+ * Domain Path:       /languages
+ */
+
+
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
+defined( 'YABP_BLOCKS_VERSION' ) or define( 'YABP_BLOCKS_VERSION', '1.0.0' );
+defined( 'YABP_BLOCKS_PLUGIN_BASENAME' ) or define( 'YABP_BLOCKS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+defined( 'YABP_BLOCKS_PLUGIN_DIR' ) or define( 'YABP_BLOCKS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+defined( 'YABP_BLOCKS_PLUGIN_URI' ) or define( 'YABP_BLOCKS_PLUGIN_URI', plugin_dir_url( __FILE__ ) );
+
+/**
+ * Load all files from a given path.
+ *
+ * @param {string} $path The path from the root of the plugin to include.
+ *
+ * @return void
+ */
+function load( $path ) {
+
+	$files = glob( YABP_BLOCKS_PLUGIN_DIR . $path . DIRECTORY_SEPARATOR . '*.php' );
+
+	foreach ( $files as $file ) {
+		require_once $file;
+	}
+
+	$directories = glob( YABP_BLOCKS_PLUGIN_DIR . $path, GLOB_ONLYDIR );
+
+	if ( ! empty( $directories ) ) {
+		foreach ( $directories as $directory ) {
+
+			$scanned_directories = array_diff( scandir( $directory ), array( '..', '.' ) );
+
+			if ( empty( $scanned_directories ) ) {
+				continue;
+			}
+
+			foreach ( $scanned_directories as $scanned_directory ) {
+
+				if ( is_file( YABP_BLOCKS_PLUGIN_DIR . $path . DIRECTORY_SEPARATOR . $scanned_directory ) ) {
+					// File in directory;
+					require_once YABP_BLOCKS_PLUGIN_DIR . $path . DIRECTORY_SEPARATOR . $scanned_directory;
+
+					continue;
+				}
+
+				load( $path . DIRECTORY_SEPARATOR . $scanned_directory );
+			}
+		}
+	}
+}
+
+load( 'includes' );

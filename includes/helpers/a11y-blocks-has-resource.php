@@ -7,7 +7,7 @@
  *
  * @return bool|mixed
  */
-function a11y_blocks_has_resource( $path ) {
+function jabp_blocks_has_resource( $path ) {
 
 	static $resources = null;
 
