@@ -18,7 +18,7 @@ function jabp_blocks_enqueue_block_client_assets() {
 				// Continue if the file is empty.
 				continue;
 			}
-			
+
 			// Name of the block by the URL.
 			$jabp_block_name = preg_replace( '/.*\/build\/blocks\/(.*)\/client.css/', '$1', $jabp_blocks_style );
 

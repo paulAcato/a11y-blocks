@@ -1,5 +1,4 @@
 <?php
-
 function jabp_blocks_get_blocks_meta() {
 	static $jabp_blocks_meta;
 	if ( ! $jabp_blocks_meta ) {
