@@ -1,0 +1,51 @@
+{
+    "$schema" : "https://schemas.wp.org/trunk/block.json",
+    "apiVersion" : 1,
+    "name" : "jabp/feedback-form",
+    "title" : "Feedback form",
+    "category" : "theme",
+    "description" : "Evaluate content with a quick feedback form.",
+    "keywords" : [
+       "feedback",
+        "form"
+    ],
+    "attributes" : {
+        "style": {
+            "type": "number",
+            "default": 1,
+            "enum": [
+                1,
+                2,
+                3
+            ]
+        },
+        "buttonStyle": {
+            "type": "string",
+            "default": "default",
+            "enum": [
+                "default",
+                "outline",
+                "outline-fill"
+            ]
+        },
+        "hideButtonLabel": {
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "icon" : "feedback",
+    "style" : "jabp-feedback-form",
+    "editorStyle" : [
+        "jabp-feedback-form-editor"
+    ],
+    "editorScript" : "file:./index.js",
+    "supports" : {
+        "anchor" : false,
+        "className" : false,
+        "customClassName" : false,
+        "html" : false
+    },
+    "textdomain" : "jabp",
+    "version" : "1.0.0",
+    "render" : "file:./render.php"
+}

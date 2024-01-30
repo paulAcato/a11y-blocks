@@ -2,7 +2,6 @@ import {_x, __} from '@wordpress/i18n';
 import {BlockControls, RichText} from '@wordpress/block-editor';
 import HeadingTagControl from "./controls/heading-tag-control";
 import {useState, useMemo} from "@wordpress/element";
-import {Notice} from '@wordpress/components';
 import {Platform} from '@wordpress/element';
 import { createBlock, getDefaultBlockName } from '@wordpress/blocks';
 import CombinedNotices from "../../../components/combined-notices";
@@ -14,7 +13,8 @@ export default function Edit(
     mergeBlocks,
     isSelected,
     clientId,
-    onReplace
+    onReplace,
+    name
   }
 ) {
   const {
@@ -98,7 +98,7 @@ export default function Edit(
         tagName={`h${attributes.level}`}
         value={attributes.content}
         className="jabp-sr-heading"
-        allowedFormats={[]}
+        allowedFormats={['core/language']}
         placeholder={_x( 'Enter your heading for screen readers…', 'Placeholder', 'jabp' )}
         onChange={(content) => {
           // Remove `<meta charset="utf-8">` from copy-and-paste actions.
@@ -112,12 +112,12 @@ export default function Edit(
           let block;
 
           if ( isOriginal || content ) {
-            block = createBlock( 'jabp/sr-heading', {
+            block = createBlock( name, {
               ...attributes,
               content,
             } );
           } else {
-            block = createBlock( getDefaultBlockName() ?? 'jabp/sr-heading' );
+            block = createBlock( getDefaultBlockName() ?? name );
           }
 
           if ( isOriginal ) {

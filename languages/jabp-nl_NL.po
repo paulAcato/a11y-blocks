@@ -1,0 +1,83 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Just Another Block Plugin 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/just-another-block-plugin\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-01-26T20:08:53+00:00\n"
+"PO-Revision-Date: 2024-01-26 21:11+0100\n"
+"Language: nl\n"
+"X-Generator: Poedit 3.4.2\n"
+"X-Domain: jabp\n"
+
+#. Plugin Name of the plugin
+msgid "Just Another Block Plugin"
+msgstr "Just Another Block Plugin"
+
+#. Description of the plugin
+msgid "Enhances the block editor by adding usefully accessible blocks to the block editor."
+msgstr "Verbetert de blokkeneditor door bruikbare blokken toe te voegen aan de blokkeneditor."
+
+#. Author of the plugin
+msgid "Paul van Impelen <paulvanimpelen@google.com>"
+msgstr "Paul van Impelen <paulvanimpelen@google.com>"
+
+#. Author URI of the plugin
+msgid "https://themeforest.net/search/paulvanimpelen"
+msgstr ""
+
+#: includes/admin/jabp-blocks-admin-notices.php:10
+#: includes/admin/jabp-blocks-register-activation-hook.php:22
+msgctxt "Plugin activation warning"
+msgid "The Just Another Blocks Plugin requires WordPress version %s or higher."
+msgstr "De Just Another Blocks Plugin vereist WordPress versie %s of hoger."
+
+#: includes/admin/jabp-blocks-register-activation-hook.php:15
+msgctxt "Plugin activation warning"
+msgid "The Just Another blocks plugin has been deactivated because the Classic Editor plugin is active."
+msgstr "De Just Another blocks plugin is gedeactiveerd omdat de Classic Editor plugin actief is."
+
+#: build/blocks/sr-heading/block.json
+#: src/blocks/sr-heading/block.json
+msgctxt "block title"
+msgid "Screen reader heading"
+msgstr "Koptekst schermlezer"
+
+#: build/blocks/sr-heading/block.json
+#: src/blocks/sr-heading/block.json
+msgctxt "block description"
+msgid "A heading block pure for screen readers."
+msgstr "Een kopblok puur voor schermlezers."
+
+#: build/blocks/sr-heading/block.json
+#: src/blocks/sr-heading/block.json
+msgctxt "block keyword"
+msgid "title"
+msgstr "titel"
+
+#: build/blocks/sr-heading/block.json
+#: src/blocks/sr-heading/block.json
+msgctxt "block keyword"
+msgid "subtitle"
+msgstr "subtitel"
+
+#: build/blocks/sr-heading/block.json
+#: src/blocks/sr-heading/block.json
+msgctxt "block keyword"
+msgid "screenreader"
+msgstr "schermlezer"
+
+#: build/blocks/sr-heading/block.json
+#: src/blocks/sr-heading/block.json
+msgctxt "block keyword"
+msgid "a11y"
+msgstr "a11y"
+
+#: build/blocks/sr-heading/block.json
+#: src/blocks/sr-heading/block.json
+msgctxt "block keyword"
+msgid "accessibility"
+msgstr "toegankelijkheid"

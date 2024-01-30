@@ -1,0 +1,110 @@
+# Copyright (C) 2024 Paul van Impelen <paulvanimpelen@google.com>
+# This file is distributed under the same license as the Just Another Block Plugin plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Just Another Block Plugin 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/just-another-block-plugin\n"
+"Last-Translator: Paul van Impelen <paulvanimpelen@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-01-26T20:14:22+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.9.0\n"
+"X-Domain: jabp\n"
+
+#. Plugin Name of the plugin
+msgid "Just Another Block Plugin"
+msgstr ""
+
+#. Description of the plugin
+msgid "Enhances the block editor by adding usefully accessible blocks to the block editor."
+msgstr ""
+
+#. Author of the plugin
+msgid "Paul van Impelen <paulvanimpelen@google.com>"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://themeforest.net/search/paulvanimpelen"
+msgstr ""
+
+#. translators: %s The required WP version.
+#: includes/admin/jabp-blocks-admin-notices.php:11
+#: includes/admin/jabp-blocks-register-activation-hook.php:23
+msgctxt "Plugin activation warning"
+msgid "The Just Another Blocks Plugin requires WordPress version %s or higher."
+msgstr ""
+
+#: includes/admin/jabp-blocks-register-activation-hook.php:15
+msgctxt "Plugin activation warning"
+msgid "The Just Another blocks plugin has been deactivated because the Classic Editor plugin is active."
+msgstr ""
+
+#: build/index.js:375
+#: src/blocks/sr-heading/scripts/edit.js:47
+#: build/index.js:192
+msgid "Go to the block"
+msgstr ""
+
+#: build/index.js:382
+#: src/blocks/sr-heading/scripts/edit.js:55
+#: build/index.js:200
+msgid "Remove block"
+msgstr ""
+
+#: build/index.js:410
+#: src/blocks/sr-heading/scripts/edit.js:86
+#: build/index.js:231
+msgid "Please remove or populate the empty Screen reader heading, saving the page will be disabled in the meantime."
+msgstr ""
+
+#: build/index.js:422
+#: src/blocks/sr-heading/scripts/edit.js:102
+#: build/index.js:247
+msgctxt "Placeholder"
+msgid "Enter your heading for screen readers…"
+msgstr ""
+
+#: build/blocks/sr-heading/block.json
+#: src/blocks/sr-heading/block.json
+msgctxt "block title"
+msgid "Screen reader heading"
+msgstr ""
+
+#: build/blocks/sr-heading/block.json
+#: src/blocks/sr-heading/block.json
+msgctxt "block description"
+msgid "A heading block pure for screen readers."
+msgstr ""
+
+#: build/blocks/sr-heading/block.json
+#: src/blocks/sr-heading/block.json
+msgctxt "block keyword"
+msgid "title"
+msgstr ""
+
+#: build/blocks/sr-heading/block.json
+#: src/blocks/sr-heading/block.json
+msgctxt "block keyword"
+msgid "subtitle"
+msgstr ""
+
+#: build/blocks/sr-heading/block.json
+#: src/blocks/sr-heading/block.json
+msgctxt "block keyword"
+msgid "screenreader"
+msgstr ""
+
+#: build/blocks/sr-heading/block.json
+#: src/blocks/sr-heading/block.json
+msgctxt "block keyword"
+msgid "a11y"
+msgstr ""
+
+#: build/blocks/sr-heading/block.json
+#: src/blocks/sr-heading/block.json
+msgctxt "block keyword"
+msgid "accessibility"
+msgstr ""

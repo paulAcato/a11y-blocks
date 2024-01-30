@@ -25,7 +25,10 @@
         "packages-update": "wp-scripts packages-update",
         "plugin-zip": "wp-scripts plugin-zip",
         "test:e2e": "wp-scripts test-e2e",
-        "test:unit": "wp-scripts test-unit-js"
+        "test:unit": "wp-scripts test-unit-js",
+        "make-pot": "wp i18n make-pot . languages/jabp.pot --domain=jabp",
+        "make-json": "wp i18n make-json . languages"
+
     },
     "devDependencies": {
         "@wordpress/eslint-plugin": "^15.1.0",

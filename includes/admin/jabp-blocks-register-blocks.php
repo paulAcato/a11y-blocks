@@ -20,5 +20,4 @@ if ( ! function_exists( 'jabp_blocks_register_blocks' ) ) {
 	}
 
 	add_action( 'init', 'jabp_blocks_register_blocks' );
-
 }
