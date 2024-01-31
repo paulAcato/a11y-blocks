@@ -14,11 +14,12 @@ import {
  * Controller for the heading level.
  *
  * @param {number} level The heading level..
- * @param {function} setAttributes the WordPress setAttrbiutes function.
+ * @param {function} setAttributes the WordPress setAttributes function.
+ * @param {string} attribute The attribute key to update.
  * @return {{}}
  * @constructor
  */
-const HeadingTagControl = ({level = 2, setAttributes}) => {
+const HeadingTagControl = ({level = 2, setAttributes, attribute = 'level' }) => {
   const headingLevels = [null, headingLevel1, headingLevel2, headingLevel3, headingLevel4, headingLevel5, headingLevel6];
 
   const controls = useMemo(() => (
@@ -32,16 +33,17 @@ const HeadingTagControl = ({level = 2, setAttributes}) => {
     ]
   ), []);
 
-  const activeControl = controls.find(control => control.level === level);
+  const activeControl = controls.find( control => control.level === level );
+  const label = 'level' === attribute ? _x( 'Select a heading level', 'jabp' ) : _x( 'Show heading as', 'jabp' );
 
   return useMemo(() => (
     <ToolbarDropdownMenu
-      label={_x('Select a heading level', 'jabp')}
+      label={label}
       icon={activeControl.icon || headingLevels[2]}
       controls={controls.map( control => ({
         ...control,
         isActive: control.level === level,
-        onClick: () => setAttributes( {level: control.level} ),
+        onClick: () => setAttributes( {[attribute]: control.level} ),
       }) )}
       isActive={activeControl.level !== 2}
     />

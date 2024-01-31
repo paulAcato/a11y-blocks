@@ -48,6 +48,10 @@ $jabp_button_attributes = [
 <section <?php echo jabp_to_dom_attributes( $jabp_attributes ); ?>>
 	<?php
 
+	if ( ! empty( $content ) && ! preg_match( '/<h[1-6](\s+[^\s>]+(\s*=\s*(?:"[^"]*"|\'[^\']*\'|[^>\s]+))?)*>\s*<\/h[1-6]>/imU', $content ) ) {
+		echo wp_kses_post( $content );
+	}
+
 	printf( '<button %1$s>%2$s<span>%4$s</span></button>
 					<button %1$s>%3$s<span>%5$s</span></button>
 					',

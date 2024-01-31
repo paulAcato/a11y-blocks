@@ -10,6 +10,35 @@
         "form"
     ],
     "attributes" : {
+        "content" : {
+            "type" : "string",
+            "source" : "text",
+            "selector" : ".jabp-feedback-form__heading",
+            "__experimentalRole" : "content"
+        },
+        "level" : {
+            "type" : "number",
+            "default" : 2,
+            "enum" : [
+                2,
+                3,
+                4,
+                5,
+                6
+            ]
+        },
+        "showLevelAs": {
+            "type": "number",
+            "default": 2,
+            "enum": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ]
+        },
         "style": {
             "type": "number",
             "default": 1,
@@ -40,10 +69,11 @@
     ],
     "editorScript" : "file:./index.js",
     "supports" : {
-        "anchor" : false,
+        "anchor" : true,
         "className" : false,
         "customClassName" : false,
-        "html" : false
+        "html" : false,
+        "multiple" : false
     },
     "textdomain" : "jabp",
     "version" : "1.0.0",

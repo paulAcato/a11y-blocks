@@ -14,13 +14,13 @@
 }
 
 .jabp-feedback-form {
+	border: 1px solid #e0e0e0;
 	border-radius: var(--jabp-feedback-form-border-radius);
 	padding: 1em;
 	container: feedback-form / inline-size;
-
-
 	display: flex;
 	gap: 0.5em;
+	flex-wrap: wrap;
 	font-size: 1rem;
 
 	svg {
@@ -46,6 +46,7 @@
 	cursor: pointer;
 	display: flex;
 	gap: 0.5em;
+	flex: 0 0 auto;
 	justify-content: center;
 	padding-block: 0.125em;
 	padding-inline: 0.5em;
@@ -90,6 +91,11 @@
 		background: var(--jabp-feedback-form-background-color);
 		border-color: var(--jabp-feedback-form-background-color);
 	}
+}
+
+.jabp-feedback-form__heading {
+	margin-block: 0;
+	width: 100%;
 }
 
 @container feedback-form (max-width: 300px) {

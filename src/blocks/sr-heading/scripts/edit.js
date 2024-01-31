@@ -1,7 +1,7 @@
 import {_x, __} from '@wordpress/i18n';
 import {BlockControls, RichText} from '@wordpress/block-editor';
-import HeadingTagControl from "./controls/heading-tag-control";
-import {useState, useMemo} from "@wordpress/element";
+import HeadingTagControl from "../../../controls/heading-tag-control";
+import {useState} from "@wordpress/element";
 import {Platform} from '@wordpress/element';
 import { createBlock, getDefaultBlockName } from '@wordpress/blocks';
 import CombinedNotices from "../../../components/combined-notices";
