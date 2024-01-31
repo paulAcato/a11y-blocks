@@ -6,7 +6,7 @@
     "category" : "theme",
     "description" : "Evaluate content with a quick feedback form.",
     "keywords" : [
-       "feedback",
+        "feedback",
         "form"
     ],
     "attributes" : {
@@ -27,10 +27,10 @@
                 6
             ]
         },
-        "showLevelAs": {
-            "type": "number",
-            "default": 2,
-            "enum": [
+        "showLevelAs" : {
+            "type" : "number",
+            "default" : 2,
+            "enum" : [
                 1,
                 2,
                 3,
@@ -39,31 +39,34 @@
                 6
             ]
         },
-        "style": {
-            "type": "number",
-            "default": 1,
-            "enum": [
+        "style" : {
+            "type" : "number",
+            "default" : 1,
+            "enum" : [
                 1,
                 2,
                 3
             ]
         },
-        "buttonStyle": {
-            "type": "string",
-            "default": "default",
-            "enum": [
+        "buttonStyle" : {
+            "type" : "string",
+            "default" : "default",
+            "enum" : [
                 "default",
                 "outline",
                 "outline-fill"
             ]
         },
-        "hideButtonLabel": {
-            "type": "boolean",
-            "default": false
+        "hideButtonLabel" : {
+            "type" : "boolean",
+            "default" : false
         }
     },
     "icon" : "feedback",
     "style" : "jabp-feedback-form",
+    "viewScript" : [
+        "jabp-feedback-form"
+    ],
     "editorStyle" : [
         "jabp-feedback-form-editor"
     ],

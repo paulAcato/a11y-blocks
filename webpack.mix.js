@@ -7,7 +7,8 @@ const ALLOWED_DIRS = ['styles', 'scripts'];
 const MIX_OPTIONS = {
   styles: {
     outputStyle: 'compressed',
-    processCssUrls: true
+    processCssUrls: true,
+    //postCss: true
   },
   outputDir: 'build'
 };
@@ -75,7 +76,9 @@ const buildFiles = (typeDir, path, outputPath = '') => {
         break;
       case 'scripts':
         if (!isEmptyDirectory( path ) && !isFileEmpty( `${path}/${file}` )) {
-          mix.js( `${path}/${file}`, outputPath ).vue( {version: 3} );
+          mix.js( `${path}/${file}`, outputPath )
+            .vue( {version: 3} )
+            .sourceMaps(mix.inProduction())
         }
         break;
     }
