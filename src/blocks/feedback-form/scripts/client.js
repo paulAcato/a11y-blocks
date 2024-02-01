@@ -1,63 +1,88 @@
-import {apiFetch} from '@wordpress/api-fetch';
+window.addEventListener( 'DOMContentLoaded', () => Array.from( document.getElementsByClassName( 'jabp-feedback-form' ) )?.forEach( f => Array.from( f.getElementsByTagName( 'button' ) )?.forEach( b => b.onclick = () => makeApiRequest( f, b.dataset.direction ) ) ) );
 
-window.addEventListener( 'DOMContentLoaded', () => {
-  const a = Array.from( document.getElementsByClassName( 'jabp-feedback-form' ) );
-  a.forEach( (el) => console.log( el ) );
+const makeApiRequest = async (section, direction) => {
+  if( ! section || ! direction ) {
+    return;
+  }
 
-  // makeApiRequest();
-} );
+  const {nonce, endpoint, post_id} = window?.jabp_feedback_form;
 
-const makeApiRequest = async () => {
-  // Replace 'your_generated_nonce' with the actual nonce value
-  const nonce = 'your_generated_nonce';
+  // Data to be sent in the POST request.
+  const params = new URLSearchParams( {
+    action: 'feedback_form',
+    post_id,
+    direction,
+    _ajax_nonce: nonce
+  } );
 
-  // Define the REST API endpoint
-  const endpoint = '/your/custom/endpoint';
-
-  // Data to be sent in the POST request
-  const data = {
-    key1: 'value1',
-    key2: 'value2',
-  };
-
-  // Create an AbortController instance to potentially cancel the request
+  // Create an AbortController instance to potentially cancel the request.
   const controller = new AbortController();
-  const { signal } = controller;
+  const {signal} = controller;
 
-  // Options for the fetch call, including the nonce, method, and signal
+  // Options for the fetch call, including the nonce, method, and signal.
   const options = {
     method: 'POST',
-    body: JSON.stringify(data),
     headers: {
-      'Content-Type': 'application/json',
-      'X-WP-Nonce': nonce,
+      'Content-Type': 'application/json;charset=utf-8',
+      'X-WP-Nonce': nonce
     },
-    signal, // Include the signal for potential cancellation
+    signal, // Include the signal for potential cancellation.
   };
 
   try {
     // Make the POST request using fetch
-    const response = await fetch(endpoint, options);
+    const response = await fetch( `${endpoint}?${params.toString()}`, options );
 
     // Check if the request was aborted
     if (signal.aborted) {
-      console.log('Request aborted');
+      console.log( 'Request aborted' );
       return;
     }
 
+    if (!response.ok) {
+      throw new Error( response.statusText );
+    }
     // Parse the response JSON
     const responseData = await response.json();
 
-    // Handle the response
-    console.log('Response:', responseData);
-  } catch (error) {
-    // Handle errors
-    console.error('Error:', error);
+    if( responseData?.success ) {
 
+      const {heading, message, direction} = responseData.data;
+
+      section.classList.add( `jabp-feedback-form--${direction}` );
+      Array.from(section.getElementsByTagName( 'button' ))?.forEach( btn => btn.setAttribute( 'disabled', 'disabled' ) );
+
+      const headingEl = section.querySelector( '.jabp-feedback-form__heading' );
+      if (headingEl) {
+        headingEl.innerHTML = heading;
+
+        const paragraphEl = document.createElement( 'p' );
+        paragraphEl.classList.add( 'jabp-feedback-form__message' );
+        paragraphEl.textContent = message;
+
+        if (headingEl.parentNode) {
+          headingEl.parentNode.insertBefore( paragraphEl, headingEl.nextSibling );
+        }
+      }
+
+      setCookie( section.id, direction, 365 );
+    }
+  } catch (error) {
     // Check if the error is due to an aborted request
     if (error.name === 'AbortError') {
-      console.log('Request aborted');
+      console.error( 'Request aborted' );
+    } else {
+      console.error( 'Error:', error );
     }
   }
 };
 
+
+
+// Function to set a cookie
+const setCookie = (name, value, daysToExpire) => {
+  const expirationDate = new Date();
+  expirationDate.setDate(expirationDate.getDate() + daysToExpire);
+
+  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expirationDate.toUTCString()}; path=/`;
+}

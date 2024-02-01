@@ -2,6 +2,7 @@
 
 /**
  * Register the block editor scripts and styles by the generated block asset file.
+ *
  * @return void
  */
 function jabp_register_blocks() {
@@ -17,7 +18,7 @@ function jabp_register_blocks() {
 	}
 
 	wp_enqueue_script( 'jabp-register-blocks', YABP_URI . 'build/index.js', $script_asset['dependencies'], $script_asset['version'], true );
-	wp_set_script_translations( 'jabp-register-blocks', 'jabp', YABP_DIR . 'languages'  );
+	wp_set_script_translations( 'jabp-register-blocks', 'jabp', YABP_DIR . 'languages' );
 }
 
 add_action( 'enqueue_block_editor_assets', 'jabp_register_blocks' );

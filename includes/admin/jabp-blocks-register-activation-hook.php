@@ -7,7 +7,7 @@
  * @return void
  */
 
-if( ! function_exists( 'jabp_blocks_register_activation_hook' ) ) {
+if ( ! function_exists( 'jabp_blocks_register_activation_hook' ) ) {
 	function jabp_blocks_register_activation_hook() {
 		// Check if the Classic Editor plugin is installed and active..
 		if ( is_plugin_active( 'classic-editor/classic-editor.php' ) ) {

@@ -32,10 +32,16 @@ switch ( $jabp_style ) {
 		$icons = [ '', '' ];
 }
 
-
 $jabp_attributes = [
-	'class' => [ 'jabp-feedback-form', 'jabp-feedback-form--style-' . $jabp_style ],
+	'class'     => [ 'jabp-feedback-form', 'jabp-feedback-form--style-' . $jabp_style ],
+	'aria-live' => 'assertive',
+	'role'      => 'feedback',
+	'id'        => $attributes['id'],
 ];
+
+if ( ! empty( $_COOKIE[ $attributes['id'] ] ) ) {
+	$jabp_attributes['class'][] = 'jabp-feedback-form--' . $_COOKIE[ $attributes['id'] ];
+}
 
 $jabp_button_attributes = [
 	'class' => [
@@ -44,23 +50,43 @@ $jabp_button_attributes = [
 	],
 ];
 
+// 'heading'  => esc_attr_x( 'Thank you for your feedback', 'After submit heading', 'jabp' ),
+
+
 ?>
 <section <?php echo jabp_to_dom_attributes( $jabp_attributes ); ?>>
 	<?php
 
-	if ( ! empty( $content ) && ! preg_match( '/<h[1-6](\s+[^\s>]+(\s*=\s*(?:"[^"]*"|\'[^\']*\'|[^>\s]+))?)*>\s*<\/h[1-6]>/imU', $content ) ) {
-		echo wp_kses_post( $content );
-	}
+	if ( ! empty( $_COOKIE[ $attributes['id'] ] ) ) :
+		if ( ! empty( $content ) && preg_match( '/<h[1-6](\s+[^\s>]+(\s*=\s*(?:"[^"]*"|\'[^\']*\'[^>\s]+))?)*>([^<]+)<\/h[1-6]>/imU', $content, $matches ) ) :
+			printf(
+				'%s<p class="jabp-feedback-form__message">%s</p>',
+				str_replace( $matches[3], esc_attr_x( 'Thank you for your feedback', 'After submit heading', 'jabp' ), $matches[0] ),
+				esc_attr_x( 'Your feedback matters! Help us improve by sharing your thoughts and experiences. Thank you for your valuable input!', 'After submit message', 'jabp' )
+			);
+		else :
+			printf(
+				'<h2 class="jabp-feedback-form__heading">%s</h2><p class="jabp-feedback-form__message">%s</p>',
+				esc_attr_x( 'Thank you for your feedback', 'After submit heading', 'jabp' ),
+				esc_attr_x( 'Your feedback matters! Help us improve by sharing your thoughts and experiences. Thank you for your valuable input!', 'After submit message', 'jabp' )
+			);
+		endif;
 
-	printf( '<button %1$s>%2$s<span>%4$s</span></button>
-					<button %1$s>%3$s<span>%5$s</span></button>
-					',
-		jabp_to_dom_attributes( $jabp_button_attributes ),
-		$icons[0],
-		$icons[1],
-		esc_attr__( 'Yes', 'jabp' ),
-		esc_attr__( 'No', 'jabp' )
-	);
+
+	else :
+		if ( ! empty( $content ) && ! preg_match( '/<h[1-6](\s+[^\s>]+(\s*=\s*(?:"[^"]*"|\'[^\']*\'|[^>\s]+))?)*>\s*<\/h[1-6]>/imU', $content ) ) :
+			echo wp_kses_post( $content );
+		endif;
+
+		printf(
+			'<button %1$s data-direction="positive">%2$s<span>%4$s</span></button><button %1$s data-direction="negative">%3$s<span>%5$s</span></button>',
+			jabp_to_dom_attributes( $jabp_button_attributes ),
+			$icons[0],
+			$icons[1],
+			esc_attr__( 'Yes', 'jabp' ),
+			esc_attr__( 'No', 'jabp' )
+		);
+	endif;
 	?>
 </section>
 

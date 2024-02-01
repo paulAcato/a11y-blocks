@@ -2,6 +2,7 @@
 
 /**
  * Register the block styles and scripts by the generated block asset file.
+ *
  * @return void
  */
 
@@ -49,6 +50,21 @@ if ( ! function_exists( 'jabp_enqueue_block_client_assets' ) ) {
 					[],
 					YABP_VERSION,
 				);
+
+				if ( 'feedback-form' === $jabp_block_name ) {
+					$jabp_block_object_name = 'jabp_' . str_replace( '-', '_', $jabp_block_name );
+					wp_localize_script(
+						"jabp-$jabp_block_name",
+						$jabp_block_object_name,
+						[
+							'endpoint' => admin_url( 'admin-ajax.php' ),
+							'nonce'    => wp_create_nonce( $jabp_block_object_name ),
+							'post_id'  => get_the_ID(),
+							'heading'  => esc_attr_x( 'Thank you for your feedback', 'After submit heading', 'jabp' ),
+							'message'  => esc_attr_x( 'Your feedback matters! Help us improve by sharing your thoughts and experiences. Thank you for your valuable input!', 'After submit message', 'jabp' ),
+						]
+					);
+				}
 			}
 		}
 	}

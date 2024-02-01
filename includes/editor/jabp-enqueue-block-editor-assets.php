@@ -2,6 +2,7 @@
 
 /**
  * Register the block editor scripts and styles by the generated block asset file.
+ *
  * @return void
  */
 function jabp_enqueue_block_editor_assets() {
@@ -22,7 +23,7 @@ function jabp_enqueue_block_editor_assets() {
 			wp_register_style(
 				"jabp-$jabp_blocks_block_name-editor",
 				jabp_mix( $jabp_blocks_style ),
-				["jabp-$jabp_blocks_block_name"],
+				[ "jabp-$jabp_blocks_block_name" ],
 				YABP_VERSION
 			);
 		}

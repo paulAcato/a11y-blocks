@@ -10,6 +10,10 @@
         "form"
     ],
     "attributes" : {
+        "id": {
+            "type": "string",
+            "default": ""
+        },
         "content" : {
             "type" : "string",
             "source" : "text",

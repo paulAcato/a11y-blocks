@@ -13,7 +13,6 @@ if ( ! function_exists( 'jabp_blocks_register_blocks' ) ) {
 			return;
 		}
 
-
 		foreach ( array_map( 'dirname', $jabp_blocks_meta ) as $jabp_block_meta ) {
 			register_block_type_from_metadata( $jabp_block_meta );
 		}
